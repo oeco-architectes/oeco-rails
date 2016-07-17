@@ -1,24 +1,53 @@
-# README
+[Oeco Architectes](http://www.oeco-architectes.com/)
+----------------------------------------------------
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![Build Status](https://img.shields.io/travis/oeco-architectes/oeco/master.svg)](https://travis-ci.org/oeco-architectes/oeco)
+[![Dependency Status](http://img.shields.io/gemnasium/oeco-architectes/oeco.svg)](https://gemnasium.com/oeco-architectes/oeco)
 
-Things you may want to cover:
+System dependencies
+-------------------
 
-* Ruby version
+* Rbenv
+* Ruby 2.3.1
+* Bundler
+* PostgreSQL
 
-* System dependencies
+```sh
+brew install rbenv && rbenv init
+rbenv install 2.3.1 && rbenv global 2.3.1 && rbenv rehash
+gem install bundler
+brew install postgresql
+```
 
-* Configuration
+Installation
+------------
 
-* Database creation
+```sh
+bundle install
+bundle exec db:setup
+```
 
-* Database initialization
+Local instance
+--------------
 
-* How to run the test suite
+```sh
+rails s
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Open http://localhost:3000/ in your browser.
 
-* Deployment instructions
+Deployment
+----------
 
-* ...
+See [Getting Started with Rails 5.x on Heroku](https://devcenter.heroku.com/articles/getting-started-with-rails5)
+for detailed instructions.
+
+```sh
+which heroku >/dev/null || brew install heroku
+heroku login
+heroku git:remote -a APP_NAME
+heroku run rake db:migrate
+heroku ps:scale web=1
+heroku ps
+heroku open
+```
