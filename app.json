@@ -21,6 +21,12 @@
     },
     "SECRET_KEY_BASE": {
       "required": true
+    },
+    "AUTH_USERNAME": {
+      "required": true
+    },
+    "AUTH_PASSWORD": {
+      "required": true
     }
   },
   "formation": {
