@@ -54,7 +54,7 @@ group :test do
   gem 'simplecov', require: false
 end
 
-group :production do
+group :production, :staging do
   # To run on Heroku, your app must have the rails_12factor gem
   gem 'rails_12factor'
 end

@@ -1,0 +1,5 @@
+data:
+  base_url: 'https://s3.amazonaws.com/oeco-data-dev'
+  img_ext: 'jpg'
+  news_url: '/news'
+  projects_url: '/projects'

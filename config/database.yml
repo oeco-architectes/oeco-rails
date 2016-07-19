@@ -83,3 +83,9 @@ production:
   database: oeco_production
   username: oeco
   password: <%= ENV['OECO_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: oeco_staging
+  username: oeco
+  password: <%= ENV['OECO_DATABASE_PASSWORD'] %>
