@@ -14,6 +14,8 @@ gem 'uglifier', '>= 1.3.0'
 # Use Babel for .es6 assets and views
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
+# Use config for custom application settings
+gem 'config'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -46,7 +48,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do 
+group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'codecov', require: false
   gem 'simplecov', require: false

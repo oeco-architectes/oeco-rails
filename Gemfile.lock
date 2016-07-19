@@ -52,7 +52,11 @@ GEM
       simplecov
       url
     concurrent-ruby (1.0.2)
+    config (1.2.1)
+      activesupport (>= 3.0)
+      deep_merge (~> 1.0, >= 1.0.1)
     debug_inspector (0.0.2)
+    deep_merge (1.0.1)
     docile (1.1.5)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -178,6 +182,7 @@ DEPENDENCIES
   byebug
   codeclimate-test-reporter
   codecov
+  config
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
