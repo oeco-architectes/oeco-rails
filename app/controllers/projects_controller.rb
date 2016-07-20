@@ -4,7 +4,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    puts params.inspect
     @project = Project.find_by_slug(params[:id])
   end
 end
