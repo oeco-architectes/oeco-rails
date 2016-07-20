@@ -1,4 +1,12 @@
-<h1>Hello World</h1>
-<p>
-  The time is now: <%= Time.now %>
-</p>
+<h1>oeco architectes</h1>
+<ol>
+  <% @news.each do |news| %>
+    <li>
+      <h2><%= news.title %></h1>
+      <p><%= news.summary %>
+      <p>
+        <%= image_tag news.img_url, alt: news.title %>
+      </p>
+    </li>
+  <% end %>
+</ol>
