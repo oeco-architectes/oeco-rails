@@ -1,7 +1,5 @@
 <h1><%= @project.title %></h1>
-<% @project.content.split('\n\n').each do |paragraph| %>
-  <p><%= paragraph %></p>
-<% end %>
+<%= markdown(@project.content) %>
 
 <p>
   <a href="<%= projects_path %>">Back</a>
