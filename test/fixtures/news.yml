@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  slug: 'fire-crews-save-cat-found-dangling'
-  title: 'Fire crews save cat found dangling from grate by her neck'
-  summary: 'Fire crews in New England used dish soap to free a curious cat who got her head stuck in the grate of a storm drain.'
+  slug: fire-crews-save-cat-found-dangling
+  title: Fire crews save cat found dangling from grate by her neck
+  summary: Fire crews in New England used dish soap to free a curious cat who got her head stuck in the grate of a storm drain.
   order: 1
 
 two:
-  slug: 'cat-rescued-from-fire'
-  title: 'Cat rescued from fire and revived by firefighters'
-  summary: 'Saving a family’s pets, when possible, can give families emotional support and a bit of hope during otherwise devastating house fires.'
+  slug: cat-rescued-from-fire
+  title: Cat rescued from fire and revived by firefighters
+  summary: Saving a family’s pets, when possible, can give families emotional support and a bit of hope during otherwise devastating house fires.
   order: 3
 
 three:
-  slug: 'kitten-set-on-fire'
-  title: 'Kitten set on fire at music festival recovers; two charged'
-  summary: 'A kitten doused with alcohol and set on fire at a country music festival in Saskatchewan is making a full recovery, thanks to emergency care.'
+  slug: kitten-set-on-fire
+  title: Kitten set on fire at music festival recovers; two charged
+  summary: A kitten doused with alcohol and set on fire at a country music festival in Saskatchewan is making a full recovery, thanks to emergency care.
   order: 2
