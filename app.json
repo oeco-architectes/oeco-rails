@@ -2,6 +2,7 @@
   "name": "oeco",
   "description": "Oeco Architectes website",
   "scripts": {
+    "postdeploy": "bin/setup"
   },
   "env": {
     "LANG": {
