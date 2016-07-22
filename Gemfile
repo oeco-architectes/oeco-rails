@@ -37,6 +37,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redcarpet for Mardown parsing
 gem 'redcarpet'
 
+# Use Foundation for Rails for styling
+gem 'foundation-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
