@@ -2,7 +2,7 @@ function carousel(element) {
   const slidesCount = element.querySelectorAll('.carousel__item').length;
   const activeClass = 'carousel__item--active';
   const playingClass = 'carousel--playing';
-  const style = element.querySelector('.carousel__slides').style;
+  const slides = element.querySelector('.carousel__slides');
 
   let currentIndex;
   let playInterval;
@@ -10,7 +10,7 @@ function carousel(element) {
 
   function updateActiveSlide(index = 0) {
     currentIndex = index;
-    style.transform = `translateX(-${100 * currentIndex}%)`;
+    slides.style.transform = `translateX(-${100 * currentIndex}%)`;
   }
 
   function next() {
@@ -18,7 +18,7 @@ function carousel(element) {
   }
 
   function previous() {
-    updateActiveSlide((currentIndex - 1) % slidesCount);
+    updateActiveSlide((currentIndex - 1 + slidesCount) % slidesCount);
   }
 
   function updateIsPlaying(isPlaying) {
@@ -78,7 +78,7 @@ function carousel(element) {
   return { play, pause, previous, next, dispose };
 }
 
-$(document).on('ready turbolinks:load', () => {
+$(document).on('ready turbolinks:load', (e) => {
   const element = document.querySelector('.carousel');
   if (element) {
     const { play, dispose } = carousel(element);

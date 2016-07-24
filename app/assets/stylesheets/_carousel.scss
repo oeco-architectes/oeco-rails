@@ -1,45 +1,31 @@
 @import 'settings';
 
-.carousel {
-  list-style: none;
+$items-spacing: 2 * $header-lineheight * 1rem;
 
-  &__figure,
-  &__caption,
-  &__image {
-    display: block;
+.carousel {
+
+  &__slides {
+    list-style: none;
+    margin: 0;
   }
 
   &__item {
-    margin-top: $header-lineheight * 1rem;
+    margin-top: $items-spacing;
+    width: 100%;
+  }
+
+  &__figure,
+  &__caption,
+  &__image img {
+    display: block;
   }
 
   &__figure {
     margin: 0;
   }
 
-  &__figure {
-    height: 0;
-    width: 100%;
-    position: relative;
-    padding-top: 100% / (8/5);
-    margin-bottom: 10rem;
-  }
-
-  &__image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
   &__caption {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    margin: 1rem 0;
+    margin-top: $header-lineheight * 1rem;
   }
 
   &__caption-title {
@@ -47,22 +33,114 @@
     text-transform: uppercase;
   }
 
+  &__controls {
+    display: none;
+  }
+
+  /**
+   * Carousel display
+   */
   .page.js & {
     overflow: hidden;
+    position: relative;
+    margin-top: $items-spacing;
+    position: relative;
 
     &__slides {
-      margin: 0;
       white-space: nowrap;
       font-size: 0;
-      position: relative;
       transition: transform 500ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
     }
 
     &__item {
       display: inline-block;
-      width: 100%;
-      font-size: 1rem;
       white-space: normal;
+      font-size: 1rem;
+      margin-top: 0;
+      vertical-align: top;
+    }
+
+    &__image,
+    &__controls {
+      width: 100%;
+      height: 0;
+      padding-top: 100% / (8/5);
+      position: relative;
+
+      > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border-color: blue;
+      }
+
+      > img {
+        object-fit: cover;
+      }
+    }
+
+    &__controls {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    &__button {
+      &--previous,
+      &--next {
+        width: 20%;
+        opacity: 0;
+        transition: opacity 300ms ease-out;
+        text-indent: -200%;
+        overflow: hidden;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::after {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-indent: 0;
+        }
+      }
+
+      &--previous {
+        right: auto;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+        &::after {
+          @include css-triangle(5px, $white, left);
+        }
+      }
+
+      &--next {
+        left: auto;
+        background: linear-gradient(-90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+        &::after {
+          @include css-triangle(5px, $white, right);
+        }
+      }
+    }
+
+    &:hover,
+    &:focus {
+      .carousel__button {
+        &--previous,
+        &--next {
+          opacity: 0.2;
+
+          &:hover,
+          &:focus {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }
