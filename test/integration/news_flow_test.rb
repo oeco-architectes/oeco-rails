@@ -6,9 +6,8 @@ class NewsFlowTest < ActionDispatch::IntegrationTest
   test 'can see the home page' do
     get '/'
     assert_response :success
-    assert_select 'h1', 'oeco architectes'
 
-    assert_select 'ol' do
+    assert_select 'ol.carousel__slides' do
       assert_select 'li', 7
       [:one, :three, :two].each_with_index do |id, i|
         assert_select "li:nth-child(#{i + 1})" do
