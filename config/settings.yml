@@ -3,3 +3,5 @@ data:
   img_ext: 'jpg'
   news_url: 'news'
   projects_url: 'projects'
+facebook:
+  page_url: https://www.facebook.com/OECO-Architectes-143451935789053/

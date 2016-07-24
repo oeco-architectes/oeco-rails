@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="page" data-controller="<%= params[:controller] %>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : 'OECO Architectes' %></title>
 
-    <%= stylesheet_link_tag    'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+    <% # Add loading class using JS to support browsers where JS is disabled %>
+    <script data-turbolinks-eval="false">document.documentElement.classList.add('loading')</script>
 
-    <nav>
-      <ul>
-        <li><a href="<%= root_path %>">Home</a></li>
-        <li><a href="<%= projects_path %>">Projects</a></li>
-      </ul>
-    </nav>
+    <%= render partial: 'shared/header', locals: { classes: 'page__section page__section--header' } %>
 
-    <%= yield %>
+    <div class="page__section page__section--body">
+      <%= yield %>
+    </div>
 
+    <%= javascript_include_tag 'application',
+      defer: !!Rails.application.config.assets.debug,
+      async: !Rails.application.config.assets.debug,
+      'data-turbolinks-eval': 'false'
+    %>
   </body>
 </html>
