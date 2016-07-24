@@ -48,7 +48,7 @@ function carousel(element) {
     updateIsPlaying(false);
   }
 
-  element.addEventListener('click', ({ target }) => {
+  function onClick({ target }) {
     if (target.hasAttribute('data-carousel-next')) {
       pause();
       next();
@@ -65,13 +65,21 @@ function carousel(element) {
     if (target.hasAttribute('data-carousel-pause')) {
       pause();
     }
-  });
+  }
+
+  function dispose() {
+    stopTimer();
+    element.removeEventListener('click', onClick);
+  }
+
+  element.addEventListener('click', onClick);
 
   updateActiveSlide();
-  return { play, pause, previous, next };
+  return { play, pause, previous, next, dispose };
 }
 
 $(document).ready(() => {
-  const { play } = carousel(document.querySelector('.carousel'));
+  const { play, dispose } = carousel(document.querySelector('.carousel'));
+  $(document).one('turbolinks:before-visit', dispose);
   play(5000);
 });
