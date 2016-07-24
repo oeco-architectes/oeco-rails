@@ -1,12 +1,20 @@
-<h1>oeco architectes</h1>
-<ol>
-  <% @news.each do |news| %>
-    <li>
-      <h2><%= news.title %></h1>
-      <p><%= news.summary %>
-      <p>
-        <%= image_tag news.img_url(1024, 768), alt: news.title %>
-      </p>
-    </li>
-  <% end %>
-</ol>
+<div class="carousel">
+  <ol class="carousel__slides" data-carousel-toggle>
+    <% @news.each_with_index do |news, i| %>
+      <li id="<%= news.slug %>" class="carousel__item">
+        <figure class="carousel__figure">
+          <%= image_tag news.img_url(1024, 768), alt: news.title, class: 'picture carousel__image' %>
+          <figcaption class="carousel__caption">
+            <h2 class="carousel__caption-title"><%= news.title %></h2>
+            <%= content_tag :p, news.summary, class: 'carousel__caption-summary' if news.summary %>
+          </figcaption>
+        </figure>
+      </li>
+    <% end %>
+  </ol>
+
+  <button data-carousel-pause>Pause</button>
+  <button data-carousel-play>Play</button>
+  <button data-carousel-previous>Previous</button>
+  <button data-carousel-next>Next</button>
+</div>
