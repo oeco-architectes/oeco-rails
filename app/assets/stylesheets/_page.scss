@@ -1,0 +1,21 @@
+.page {
+  padding: 0 1rem;
+
+  &__section {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 64rem;
+    transition: max-width 100ms linear;
+
+    .page[data-controller="home"] & {
+      max-width: 56rem;
+    }
+
+    &--body {
+      transition: opacity 500ms ease-out;
+      .page.loading & {
+        opacity: 0;
+      }
+    }
+  }
+}
