@@ -1,0 +1,33 @@
+@import 'settings';
+
+.header {
+  margin-top: (2 * $header-lineheight * 1rem);
+  margin-bottom: (2 * $header-lineheight * 1rem);
+
+  // Force wrapping on small dimensions
+  @include breakpoint(small only) {
+    > * {
+      width: 100%;
+    }
+  }
+
+  &__logo {
+    padding-bottom: 0.5rem; // Improve logo/menu text alignment
+  }
+
+  &__nav-list {
+    list-style: none;
+    margin-bottom: 0;
+    margin-top: $header-lineheight * 1rem;
+  }
+
+  &__nav-item {
+    a {
+      font-weight: normal;
+    }
+
+    &--active > a {
+      font-weight: $global-weight-bold;
+    }
+  }
+}

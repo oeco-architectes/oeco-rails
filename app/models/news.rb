@@ -2,8 +2,11 @@ class News < ApplicationRecord
   validates :url, presence: true, uniqueness: true
   validates :order, presence: true, uniqueness: true
 
-  def img_url
-    s = Settings.data
-    URI("#{s.base_url}/#{s.news_url}/#{slug}.#{s.img_ext}")
+  def img_url(width, height)
+    Settings.data.news_img % {
+      slug: slug,
+      width: width,
+      height: height
+    }
   end
 end

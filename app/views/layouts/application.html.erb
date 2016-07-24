@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="page loading no-js" data-controller="<%= params[:controller] %>">
   <head>
-    <title>Oeco</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title><%= "#{yield(:title)} - " if content_for?(:title) %>OECO Architectes</title>
+
+    <%= stylesheet_link_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet"/>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><a href="<%= root_path %>">Home</a></li>
-        <li><a href="<%= projects_path %>">Projects</a></li>
-      </ul>
-    </nav>
+    <script data-turbolinks-eval="false">
+      var l = document.documentElement.classList;
+      l.remove('no-js');
+      l.add('js')
+    </script>
 
-    <%= yield %>
+    <%= render partial: 'shared/header', locals: { classes: 'page__section page__section--header' } %>
+
+    <div class="page__section page__section--body">
+      <%= yield %>
+    </div>
+
+    <%= javascript_include_tag 'application',
+      defer: !!Rails.application.config.assets.debug,
+      async: !Rails.application.config.assets.debug,
+      'data-turbolinks-eval': 'false'
+    %>
   </body>
 </html>

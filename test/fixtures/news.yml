@@ -17,3 +17,27 @@ three:
   title: Kitten set on fire at music festival recovers; two charged
   summary: A kitten doused with alcohol and set on fire at a country music festival in Saskatchewan is making a full recovery, thanks to emergency care.
   order: 2
+
+four:
+  slug: chicago-employs-tree-house-ferals-to-eradicate-rats
+  title: Chicago employs tree house ferals to eradicate rats
+  summary: The same can be said of Patch, Fluffy, and Skinnerina who helped clean up a suburban backyard that, at one time, had a 400+ population according to exterminators.
+  order: 4
+
+five:
+  slug: cat-attempts-to-obtain-owners-password
+  title: Cat attempts to obtain owner’s password
+  summary: People need to take all kinds of measures these days for all the spamming, scamming, viruses, Trojan Horses, security breeches, identity theft, you name it.
+  order: 5
+
+six:
+  slug: rescued-sphynx-gets-puppy
+  title: Rescued sphynx gets puppy
+  summary: Botox spent most of his life in a cage until he was rescued. Not only did he get a forever home, he also got a puppy.
+  order: 6
+
+seven:
+  slug: cat-saved-from-flood-waters-by-good-citizen
+  title: Cat saved from flood waters by good citizen
+  summary: What may seem small in someone else’s eyes could be the world to someone else.
+  order: 7

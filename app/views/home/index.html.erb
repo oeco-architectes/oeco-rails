@@ -1,12 +1,29 @@
-<h1>oeco architectes</h1>
-<ol>
-  <% @news.each do |news| %>
-    <li>
-      <h2><%= news.title %></h1>
-      <p><%= news.summary %>
-      <p>
-        <%= image_tag news.img_url, alt: news.title %>
-      </p>
-    </li>
-  <% end %>
-</ol>
+<div class="carousel">
+  <ol class="carousel__slides" data-carousel-toggle>
+    <% @news.each do |news| %>
+      <li id="<%= news.slug %>" class="carousel__item">
+        <figure class="carousel__figure">
+          <div class="carousel__image">
+            <%= image_tag '', 'data-src': news.img_url(1024, 768), alt: news.title, class: 'picture lazy-load' %>
+            <noscript>
+              <%= image_tag news.img_url(1024, 768), alt: news.title, class: 'picture' %>
+            </noscript>
+          </div>
+          <figcaption class="carousel__caption">
+            <h2 class="carousel__caption-title"><%= news.title %></h2>
+            <%= content_tag :p, news.summary, class: 'carousel__caption-summary' if news.summary %>
+          </figcaption>
+        </figure>
+      </li>
+    <% end %>
+  </ol>
+  <div class="carousel__controls">
+    <button class="carousel__button carousel__button--previous" data-carousel-previous>Previous</button>
+    <button class="carousel__button carousel__button--next" data-carousel-next>Next</button>
+    <ol class="carousel__nav">
+      <% @news.length.times do %>
+        <li class="carousel__nav-item">
+      <% end %>
+    </ol>
+  </div>
+</div>

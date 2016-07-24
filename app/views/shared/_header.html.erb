@@ -1,0 +1,21 @@
+<header class="<%= classes %> header row align-bottom">
+  <a href="<%= root_path %>" class="header__logo column text-center medium-text-left" data-controller="home">
+    <%= image_tag 'oeco-architectes-logo.jpg', alt: 'OECO Architectes logo', width: 280, height: 127 %>
+  </a>
+
+  <nav class="header__nav shrink column">
+    <ul class="header__nav-list row align-center align-middle">
+      <li class="header__nav-item column shrink text-center medium-text-right <%= 'header__nav-item--active' if controller?('projects') %>">
+        <a href="<%= projects_path %>" data-controller="projects">Projects</a>
+      </li>
+      <li class="header__nav-item column shrink text-center medium-text-right <%= 'header__nav-item--active' if controller?('agency') %>">
+        <a href="#" data-controller="agency">Agency</a>
+      </li>
+      <li class="header__nav-item column shrink text-center medium-text-right">
+        <a href="<%= Settings.facebook.page_url %>" target="_blank" rel="nofollow">
+          <%= image_tag 'facebook.png', alt: 'Facebook logo', width: 32, height: 32 %>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>

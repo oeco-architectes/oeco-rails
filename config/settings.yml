@@ -1,5 +1,5 @@
 data:
-  base_url: 'https://s3.amazonaws.com/oeco-data-dev'
-  img_ext: 'jpg'
-  news_url: 'news'
-  projects_url: 'projects'
+  news_img: http://lorempixel.com/%{width}/%{height}/cats/?%{slug}
+  project_img: http://lorempixel.com/%{width}/%{height}/cats/?%{slug}
+facebook:
+  page_url: https://www.facebook.com/OECO-Architectes-143451935789053/
