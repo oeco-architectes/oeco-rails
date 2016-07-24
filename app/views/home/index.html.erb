@@ -1,9 +1,12 @@
 <div class="carousel">
   <ol class="carousel__slides" data-carousel-toggle>
-    <% @news.each_with_index do |news, i| %>
+    <% @news.each do |news| %>
       <li id="<%= news.slug %>" class="carousel__item">
         <figure class="carousel__figure">
-          <%= image_tag news.img_url(1024, 768), alt: news.title, class: 'picture carousel__image' %>
+          <%= image_tag '', 'data-src': news.img_url(1024, 768), alt: news.title, class: 'picture carousel__image lazy-load' %>
+          <noscript>
+            <%= image_tag news.img_url(1024, 768), alt: news.title, class: 'picture carousel__image' %>
+          </noscript>
           <figcaption class="carousel__caption">
             <h2 class="carousel__caption-title"><%= news.title %></h2>
             <%= content_tag :p, news.summary, class: 'carousel__caption-summary' if news.summary %>
