@@ -15,7 +15,7 @@ class NewsFlowTest < ActionDispatch::IntegrationTest
           assert_select 'h2', news(id).title
           assert_select 'p', news(id).summary
           assert_select 'img'
-          assert_select 'img[src=?]', news(id).img_url.to_s
+          assert_select 'img[src=?]', news(id).img_url(1024, 768).to_s
           assert_select 'img[alt=?]', news(id).title
         end
       end
