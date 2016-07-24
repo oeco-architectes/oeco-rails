@@ -18,3 +18,17 @@
 @import 'foundation_and_overrides';
 @import 'page';
 @import 'header';
+
+.turbolinks-progress-bar {
+  background: #000;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
+  }
+}
