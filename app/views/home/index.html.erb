@@ -17,8 +17,13 @@
       </li>
     <% end %>
   </ol>
-  <div class="carousel__buttons">
+  <div class="carousel__controls">
     <button class="carousel__button carousel__button--previous" data-carousel-previous>Previous</button>
     <button class="carousel__button carousel__button--next" data-carousel-next>Next</button>
+    <ol class="carousel__nav">
+      <% @news.length.times do %>
+        <li class="carousel__nav-item">
+      <% end %>
+    </ol>
   </div>
 </div>

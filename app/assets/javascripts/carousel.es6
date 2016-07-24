@@ -1,16 +1,25 @@
 function carousel(element) {
   const slidesCount = element.querySelectorAll('.carousel__item').length;
-  const activeClass = 'carousel__item--active';
   const playingClass = 'carousel--playing';
   const slides = element.querySelector('.carousel__slides');
+  const activeNavItems = Array.prototype.slice.call(element.querySelectorAll('.carousel__nav-item'));
+  const activeNavItemClass = 'carousel__nav-item--active';
 
   let currentIndex;
   let playInterval;
   let playDelay;
+  let activeNavItem;
 
-  function updateActiveSlide(index = 0) {
+  function updateActiveSlide(index) {
     currentIndex = index;
     slides.style.transform = `translateX(-${100 * currentIndex}%)`;
+    if (activeNavItem) {
+      activeNavItem.classList.remove(activeNavItemClass);
+    }
+    if (currentIndex !== undefined) {
+      activeNavItem = activeNavItems[currentIndex];
+      activeNavItem.classList.add(activeNavItemClass);
+    }
   }
 
   function next() {
@@ -70,11 +79,12 @@ function carousel(element) {
   function dispose() {
     stopTimer();
     element.removeEventListener('click', onClick);
+    updateActiveSlide();
   }
 
   element.addEventListener('click', onClick);
 
-  updateActiveSlide();
+  updateActiveSlide(0);
   return { play, pause, previous, next, dispose };
 }
 
