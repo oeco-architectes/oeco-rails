@@ -29,8 +29,13 @@ $items-spacing: 2 * $header-lineheight * 1rem;
   }
 
   &__caption-title {
-    font-size: 1rem;
+    font-size: rem-calc(18px);
     text-transform: uppercase;
+    font-weight: $global-weight-light;
+  }
+
+  &__caption-summary {
+    font-size: rem-calc(14px);
   }
 
   &__controls {
@@ -43,7 +48,7 @@ $items-spacing: 2 * $header-lineheight * 1rem;
   .page.js & {
     overflow: hidden;
     position: relative;
-    margin-top: $items-spacing;
+    margin-top: 2 * $items-spacing;
     position: relative;
 
     &__slides {
