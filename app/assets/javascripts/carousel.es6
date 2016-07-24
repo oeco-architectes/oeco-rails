@@ -78,7 +78,7 @@ function carousel(element) {
   return { play, pause, previous, next, dispose };
 }
 
-$(document).ready(() => {
+$(document).on('ready turbolinks:load', () => {
   const element = document.querySelector('.carousel');
   if (element) {
     const { play, dispose } = carousel(element);
