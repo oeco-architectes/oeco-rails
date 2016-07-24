@@ -3,3 +3,10 @@ services: postgresql
 before_script:
 - bundle exec rake db:setup
 cache: bundler
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rvm $(< .ruby-version) do bin/deploy
+  on:
+    repo: oeco-architectes/oeco
+    tags: true

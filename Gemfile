@@ -16,6 +16,8 @@ gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 # Use config for custom application settings
 gem 'config'
+# User Heroku for deployment
+gem 'platform-api'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
