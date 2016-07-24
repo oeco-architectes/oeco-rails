@@ -27,7 +27,7 @@
     }
 
     &--active > a {
-      font-weight: bold;
+      font-weight: $global-weight-bold;
     }
   }
 }

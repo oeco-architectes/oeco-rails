@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="page" data-controller="<%= params[:controller] %>">
+<html lang="en" class="page loading no-js" data-controller="<%= params[:controller] %>">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : 'OECO Architectes' %></title>
+    <title><%= "#{yield(:title)} - " if content_for?(:title) %>OECO Architectes</title>
 
     <%= stylesheet_link_tag 'application' %>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet"/>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <% # Add loading class using JS to support browsers where JS is disabled %>
-    <script data-turbolinks-eval="false">document.documentElement.classList.add('loading')</script>
+    <script data-turbolinks-eval="false">
+      var l = document.documentElement.classList;
+      l.remove('no-js');
+      l.add('js')
+    </script>
 
     <%= render partial: 'shared/header', locals: { classes: 'page__section page__section--header' } %>
 
