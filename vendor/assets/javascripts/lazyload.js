@@ -92,22 +92,22 @@
         }
       }
 
-      addEventListener('load', function _lazyLoaderInit() {
-        var imageNodes = document.querySelectorAll('img[data-src]');
+      ['load', 'turbolinks:load'].forEach(function(eventName) {
+        addEventListener(eventName, function _lazyLoaderInit() {
+          var imageNodes = document.querySelectorAll('img[data-src]');
 
-        for (var i = 0; i < imageNodes.length; i++) {
-          var imageNode = imageNodes[i];
+          for (var i = 0; i < imageNodes.length; i++) {
+            var imageNode = imageNodes[i];
 
-          // Add a placeholder if one doesn't exist
-          //imageNode.src = imageNode.src || lazyLoader.tinyGif;
+            // Add a placeholder if one doesn't exist
+            //imageNode.src = imageNode.src || lazyLoader.tinyGif;
 
-          lazyLoader.cache.push(imageNode);
-        }
+            lazyLoader.cache.push(imageNode);
+          }
 
-        lazyLoader.addObservers();
-        lazyLoader.loadVisibleImages();
-
-        removeEventListener('load', _lazyLoaderInit, false);
+          lazyLoader.addObservers();
+          lazyLoader.loadVisibleImages();
+        });
       });
     }
   }
