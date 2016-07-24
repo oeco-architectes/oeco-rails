@@ -1,0 +1,79 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/boot'
+
+require 'pathname'
+require 'fileutils'
+require 'json'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  puts "\n== Checking requirements =="
+  if ENV.has_key?('HEROKU_API_KEY')
+    puts 'HEROKU_API_KEY is set'
+  else
+    STDERR.puts "Error: HEROKU_API_KEY environment variable is not set, exiting."
+    abort
+  end
+
+  puts '== Installing dependencies =='
+  system! 'gem install bundler --conservative'
+  system('bundle check') || system!('bundle install')
+
+  puts "\n== Retrieving application information =="
+  require 'platform-api'
+  client = PlatformAPI::connect(ENV['HEROKU_API_KEY'])
+
+  config_file = File.read('app.json')
+  puts "Found application config: app.json"
+  app_name = JSON.parse(config_file)['name']
+  puts "Found application: #{app_name}"
+
+  pipeline = client.pipeline_coupling.info(app_name)['pipeline']
+  puts "Found pipeline: #{pipeline['name']}"
+  couplings = client.pipeline_coupling.list().find_all do |coupling|
+    coupling['pipeline']['id'] == pipeline['id']
+  end
+
+  apps = client.app.list()
+  staging_app_id = couplings.find { |coupling| coupling['stage'] == 'staging' }['app']['id']
+  staging_app = apps.find { |app| app['id'] == staging_app_id }
+  puts "Found staging app: #{staging_app['name']}"
+
+  production_app_id = couplings.find { |coupling| coupling['stage'] == 'production' }['app']['id']
+  production_app = apps.find { |app| app['id'] == production_app_id }
+  puts "Found production app: #{production_app['name']}"
+
+  puts "\n== Deployment =="
+  puts "Promoting #{staging_app['name']} to production..."
+  promotion = client.pipeline_promotion.create({
+    'pipeline': { 'id': pipeline['id'] },
+    'source': {
+      'app': { 'id': staging_app['id'] }
+    },
+    'targets': [{
+      'app': { 'id': production_app['id'] }
+    }]
+  })
+  puts "Promoted #{staging_app['name']} successfully!"
+
+  status = promotion['status']
+  while status == 'pending'
+    puts "Status is #{status}, waiting..."
+    sleep(1)
+    status = client.pipeline_promotion.info(promotion['id'])['status']
+  end
+  if status == 'completed'
+    puts "Deployment completed."
+  else
+    STDERR.puts "Deployment failed: #{status}"
+    abort
+  end
+end
