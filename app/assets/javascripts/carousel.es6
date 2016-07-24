@@ -79,7 +79,10 @@ function carousel(element) {
 }
 
 $(document).ready(() => {
-  const { play, dispose } = carousel(document.querySelector('.carousel'));
-  $(document).one('turbolinks:before-visit', dispose);
-  play(5000);
+  const element = document.querySelector('.carousel');
+  if (element) {
+    const { play, dispose } = carousel(element);
+    $(document).one('turbolinks:before-visit', dispose);
+    play(5000);
+  }
 });
