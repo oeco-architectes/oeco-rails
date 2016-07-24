@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : 'OECO Architectes' %></title>
+    <title><%= "#{yield(:title)} - " if content_for?(:title) %>OECO Architectes</title>
 
     <%= stylesheet_link_tag 'application' %>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet"/>
