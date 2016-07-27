@@ -1,7 +1,7 @@
 language: ruby
 services: postgresql
 before_script:
-- bundle exec rake db:setup
+- bin/setup
 cache: bundler
 deploy:
   provider: script
