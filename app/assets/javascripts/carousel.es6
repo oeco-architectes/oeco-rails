@@ -1,3 +1,5 @@
+import ready from 'document-ready-promise';
+
 function carousel(element) {
   const slidesCount = element.querySelectorAll('.carousel__item').length;
   const playingClass = 'carousel--playing';
@@ -88,11 +90,24 @@ function carousel(element) {
   return { play, pause, previous, next, dispose };
 }
 
-$(document).on('ready turbolinks:load', (e) => {
+function addEventListenerOnce(target, name, callback) {
+  function boundCallback(...args) {
+    callback(...args);
+    target.removeEventListener(target, name, boundCallback);
+  }
+  target.addEventListener(target, name, boundCallback);
+}
+
+function initCarousel() {
   const element = document.querySelector('.carousel');
   if (element) {
     const { play, dispose } = carousel(element);
-    $(document).one('turbolinks:before-visit', dispose);
+    addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
     play(5000);
+    return dispose;
   }
-});
+  return () => {};
+}
+
+ready().then(initCarousel);
+document.addEventListener('turbolinks:load', initCarousel);
