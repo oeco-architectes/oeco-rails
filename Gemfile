@@ -11,9 +11,6 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-# Use Babel for .es6 assets and views
-gem 'sprockets', '>= 3.0.0'
-gem 'sprockets-es6'
 # Use config for custom application settings
 gem 'config'
 # User Heroku for deployment
