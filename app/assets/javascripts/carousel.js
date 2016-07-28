@@ -1,6 +1,4 @@
-import ready from 'document-ready-promise';
-
-function carousel(element) {
+export function carousel(element) {
   const slidesCount = element.querySelectorAll('.carousel__item').length;
   const playingClass = 'carousel--playing';
   const slides = element.querySelector('.carousel__slides');
@@ -89,25 +87,3 @@ function carousel(element) {
   updateActiveSlide(0);
   return { play, pause, previous, next, dispose };
 }
-
-function addEventListenerOnce(target, name, callback) {
-  function boundCallback(...args) {
-    callback(...args);
-    target.removeEventListener(target, name, boundCallback);
-  }
-  target.addEventListener(target, name, boundCallback);
-}
-
-function initCarousel() {
-  const element = document.querySelector('.carousel');
-  if (element) {
-    const { play, dispose } = carousel(element);
-    addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
-    play(5000);
-    return dispose;
-  }
-  return () => {};
-}
-
-ready().then(initCarousel);
-document.addEventListener('turbolinks:load', initCarousel);
