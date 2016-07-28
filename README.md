@@ -24,9 +24,7 @@ Installation
 ------------
 
 ```sh
-bundle install
-rails db:setup
-rails db:fixtures:load
+bin/setup
 ```
 
 Local instance
