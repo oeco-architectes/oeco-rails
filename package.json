@@ -5,7 +5,8 @@
     "babel-preset-es2016": "^6.9.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
-    "browserify-incremental": "^3.1.1"
+    "browserify-incremental": "^3.1.1",
+    "document-ready-promise": "^3.0.1"
   },
   "babel": {
     "presets": [

@@ -1,3 +1,5 @@
+import ready from 'document-ready-promise';
+
 export function addEventListenerOnce(target, name, callback) {
   function boundCallback(...args) {
     callback(...args);
@@ -7,5 +9,8 @@ export function addEventListenerOnce(target, name, callback) {
 }
 
 export function onReady(callback) {
-  document.addEventListener('turbolinks:load', callback);
+  ready().then(() => {
+    callback();
+    setTimeout(() => document.addEventListener('turbolinks:load', callback), 0);
+  });
 }
