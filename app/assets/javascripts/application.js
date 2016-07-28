@@ -26,7 +26,7 @@ function updateHtmlAttributes(
 }
 
 onReady(() => {
-  document.documentElement.classList.remove('loading');
+  setTimeout(() => document.documentElement.classList.remove('loading'), 0);
 
   // Carousel
   const element = document.querySelector('.carousel');
