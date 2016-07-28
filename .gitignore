@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/npm-debug.log
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -19,6 +20,10 @@
 # Ignore coverage reports
 /coverage
 
+# Ignore local configuration files
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+# Ignore NPM modules
+/node_modules
