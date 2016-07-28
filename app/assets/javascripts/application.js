@@ -10,9 +10,36 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require foundation
 //= require turbolinks
 //= require lazyload
-//= require_tree .
+
+import { onReady, addEventListenerOnce } from './dom';
+import { carousel } from './carousel';
+
+function updateHtmlAttributes(
+  reference = document.body,
+  controller = reference.getAttribute('data-controller')
+) {
+  if (controller) {
+    document.documentElement.setAttribute('data-controller', controller);
+  }
+}
+
+onReady(() => {
+  document.documentElement.classList.remove('loading');
+
+  // Carousel
+  const element = document.querySelector('.carousel');
+  if (element) {
+    const { play, dispose } = carousel(element);
+    addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
+    play(5000);
+  }
+});
+
+document.addEventListener('turbolinks:click', ({ target }) => {
+  document.documentElement.classList.add('loading');
+  addEventListenerOnce(document, 'turbolinks:load', () => {
+    setTimeout(() => updateHtmlAttributes(target), 0);
+  });
+});
