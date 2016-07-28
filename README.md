@@ -1,4 +1,4 @@
-[Oeco Architectes](http://www.oeco-architectes.com/)
+[OECO Architectes](http://www.oeco-architectes.com/)
 ----------------------------------------------------
 
 [![Build Status](https://img.shields.io/travis/oeco-architectes/oeco/master.svg)](https://travis-ci.org/oeco-architectes/oeco)
