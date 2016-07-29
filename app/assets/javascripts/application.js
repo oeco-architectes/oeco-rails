@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require lazyload
 
 import { onReady, addEventListenerOnce } from './dom';
 import { carousel } from './carousel';
+import { lazyLoader } from './lazyload';
 
 function updateHtmlAttributes(
   reference = document.body,
@@ -35,6 +35,9 @@ onReady(() => {
     addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
     play(5000);
   }
+
+  // Lazy loader
+  lazyLoader.init();
 });
 
 document.addEventListener('turbolinks:click', ({ target }) => {

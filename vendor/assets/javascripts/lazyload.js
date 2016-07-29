@@ -92,7 +92,7 @@
         }
       }
 
-      ['load', 'turbolinks:load'].forEach(function(eventName) {
+      ['load', 'turbolinks:load'].forEach(setTimeout(function(eventName) {
         addEventListener(eventName, function _lazyLoaderInit() {
           var imageNodes = document.querySelectorAll('img[data-src]');
 
@@ -108,7 +108,7 @@
           lazyLoader.addObservers();
           lazyLoader.loadVisibleImages();
         });
-      });
+      }, 0));
     }
   }
 

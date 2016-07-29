@@ -1,8 +1,17 @@
 <% content_for :title, 'Projects' %>
-<ul>
+<ul class="row mozaic">
   <% @projects.each do |project| %>
-    <li>
-      <a href="<%= project_path(project) %>"><%= project.title %></a>
+    <li class="small-12 medium-3 columns">
+      <a href="<%= project_path(project) %>">
+        <figure class="mozaic-tile">
+          <div class="picture">
+            <%= image_tag '', 'data-src': project.img_url(300, 300), alt: project.title, width: 300, height: 300 %>
+            <noscript>
+              <%= image_tag project.img_url(300, 300), alt: project.title, width: 300, height: 300 %>
+            </noscript>
+          </div>
+          <figcaption class="mozaic-tile__caption"><%= project.title %></figcaption>
+        </figure>
     </li>
   <% end %>
 </ul>
