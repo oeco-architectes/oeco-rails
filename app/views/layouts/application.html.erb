@@ -12,12 +12,7 @@
   </head>
 
   <body>
-    <script data-turbolinks-eval="false">
-      var l = document.documentElement.classList;
-      l.remove('no-js');
-      l.add('js')
-    </script>
-
+    <%= render partial: 'shared/support' %>
     <%= render partial: 'shared/header', locals: { classes: 'page__section page__section--header' } %>
 
     <div class="page__section page__section--body">

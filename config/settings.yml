@@ -1,5 +1,5 @@
 data:
   news_img: http://lorempixel.com/%{width}/%{height}/cats/?%{slug}
-  project_img: http://lorempixel.com/%{width}/%{height}/cats/?%{slug}
+  project_img: http://lorempixel.com/%{width}/%{height}/cats/?%{slug}/%{index}
 facebook:
   page_url: https://www.facebook.com/OECO-Architectes-143451935789053/
