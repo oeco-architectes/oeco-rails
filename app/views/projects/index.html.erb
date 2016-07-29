@@ -2,7 +2,15 @@
 <ul>
   <% @projects.each do |project| %>
     <li>
-      <a href="<%= project_path(project) %>"><%= project.title %></a>
+      <a href="<%= project_path(project) %>">
+        <figure>
+          <%= image_tag '', 'data-src': project.img_url(300, 300), alt: project.title, class: 'picture lazy-load' %>
+          <noscript>
+            <%= image_tag project.img_url(300, 300), alt: project.title, class: 'picture' %>
+          </noscript>
+          <figcaption><%= project.title %></figcaption>
+        </figure>
+        <%= project.title %></a>
     </li>
   <% end %>
 </ul>
