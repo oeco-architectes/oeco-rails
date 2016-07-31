@@ -1,0 +1,9 @@
+img[data-src] {
+  transition: opacity ease-out 500ms;
+  opacity: 0;
+
+  &.loading,
+  &.loaded {
+    opacity: 1;
+  }
+}

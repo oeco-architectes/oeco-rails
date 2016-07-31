@@ -4,10 +4,12 @@
     <li>
       <a href="<%= project_path(project) %>">
         <figure>
-          <%= image_tag '', 'data-src': project.img_url(300, 300), alt: project.title, class: 'picture lazy-load' %>
-          <noscript>
-            <%= image_tag project.img_url(300, 300), alt: project.title, class: 'picture' %>
-          </noscript>
+          <div class="picture">
+            <%= image_tag '', 'data-src': project.img_url(300, 300), alt: project.title, width: 300, height: 300 %>
+            <noscript>
+              <%= image_tag project.img_url(300, 300), alt: project.title, width: 300, height: 300 %>
+            </noscript>
+          </div>
           <figcaption><%= project.title %></figcaption>
         </figure>
         <%= project.title %></a>
