@@ -8,9 +8,13 @@ export function addEventListenerOnce(target, name, callback) {
   target.addEventListener(name, boundCallback);
 }
 
+export function setImmediate(fn) {
+  return setTimeout(fn, 0);
+}
+
 export function onReady(callback) {
   ready().then(() => {
     callback();
-    setTimeout(() => document.addEventListener('turbolinks:load', callback), 0);
+    setImmediate(() => document.addEventListener('turbolinks:load', callback));
   });
 }

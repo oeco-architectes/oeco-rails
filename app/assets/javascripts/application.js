@@ -12,7 +12,7 @@
 //
 //= require turbolinks
 
-import { onReady, addEventListenerOnce } from './dom';
+import { setImmediate, onReady, addEventListenerOnce } from './dom';
 import { carousel } from './carousel';
 import { lazyLoader } from './lazyload';
 
@@ -26,7 +26,7 @@ function updateHtmlAttributes(
 }
 
 onReady(() => {
-  setTimeout(() => document.documentElement.classList.remove('loading'), 0);
+  setImmediate(() => document.documentElement.classList.remove('loading'));
 
   // Carousel
   const element = document.querySelector('.carousel');
@@ -43,6 +43,6 @@ onReady(() => {
 document.addEventListener('turbolinks:click', ({ target }) => {
   document.documentElement.classList.add('loading');
   addEventListenerOnce(document, 'turbolinks:load', () => {
-    setTimeout(() => updateHtmlAttributes(target), 0);
+    setImmediate(() => updateHtmlAttributes(target));
   });
 });
