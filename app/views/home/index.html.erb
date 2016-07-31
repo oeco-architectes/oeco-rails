@@ -3,13 +3,13 @@
     <% @news.each_with_index do |news, i| %>
       <li id="<%= news.slug %>" class="carousel__item">
         <figure class="carousel__figure">
-          <div class="carousel__image">
+          <div class="carousel__image picture">
             <% if i == 0 %>
-              <%= image_tag news.img_url(1024, 768), alt: news.title, class: 'picture' %>
+              <%= image_tag news.img_url(1024, 768), alt: news.title %>
             <% else %>
-              <%= image_tag '', 'data-src': news.img_url(1024, 768), alt: news.title, class: 'picture lazy-load' %>
+              <%= image_tag '', 'data-src': news.img_url(1024, 768), alt: news.title %>
               <noscript>
-                <%= image_tag news.img_url(1024, 768), alt: news.title, class: 'picture' %>
+                <%= image_tag news.img_url(1024, 768), alt: news.title %>
               </noscript>
             <% end %>
           </div>

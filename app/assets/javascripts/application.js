@@ -14,7 +14,7 @@
 
 import { setImmediate, onReady, addEventListenerOnce } from './dom';
 import { carousel } from './carousel';
-import { lazyLoader } from './lazyload';
+import { lazyload } from './lazyload';
 
 function updateHtmlAttributes(
   reference = document.body,
@@ -25,24 +25,23 @@ function updateHtmlAttributes(
   }
 }
 
-onReady(() => {
-  setImmediate(() => document.documentElement.classList.remove('loading'));
-
-  // Carousel
-  const element = document.querySelector('.carousel');
-  if (element) {
-    const { play, dispose } = carousel(element);
-    addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
-    play(5000);
-  }
-
-  // Lazy loader
-  lazyLoader.init();
-});
-
 document.addEventListener('turbolinks:click', ({ target }) => {
   document.documentElement.classList.add('loading');
   addEventListenerOnce(document, 'turbolinks:load', () => {
     setImmediate(() => updateHtmlAttributes(target));
   });
+});
+
+onReady(() => {
+  setImmediate(() => document.documentElement.classList.remove('loading'));
+
+  const updateLazyload = lazyload();
+
+  // Carousel
+  const element = document.querySelector('.carousel');
+  if (element) {
+    const { play, dispose } = carousel(element, updateLazyload);
+    addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
+    play(5000);
+  }
 });
