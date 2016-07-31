@@ -1,4 +1,9 @@
-export function carousel(element) {
+import { setImmediate, isEventSupported } from './dom';
+
+const noop = () => {};
+const isTransitionEndSupported = isEventSupported('transitionend');
+
+export function carousel(element, onChange = noop) {
   const slidesCount = element.querySelectorAll('.carousel__item').length;
   const playingClass = 'carousel--playing';
   const slides = element.querySelector('.carousel__slides');
@@ -10,15 +15,25 @@ export function carousel(element) {
   let playDelay;
   let activeNavItem;
 
+  if (isTransitionEndSupported) {
+    slides.addEventListener('transitionend', onChange);
+  }
+
   function updateActiveSlide(index) {
-    currentIndex = index;
-    slides.style.transform = `translateX(-${100 * currentIndex}%)`;
-    if (activeNavItem) {
-      activeNavItem.classList.remove(activeNavItemClass);
-    }
-    if (currentIndex !== undefined) {
-      activeNavItem = activeNavItems[currentIndex];
-      activeNavItem.classList.add(activeNavItemClass);
+    if (index !== currentIndex) {
+      currentIndex = index;
+      slides.style.transform = `translateX(-${100 * currentIndex}%)`;
+      if (activeNavItem) {
+        activeNavItem.classList.remove(activeNavItemClass);
+      }
+      if (currentIndex !== undefined) {
+        activeNavItem = activeNavItems[currentIndex];
+        activeNavItem.classList.add(activeNavItemClass);
+      }
+
+      if (!isTransitionEndSupported && index !== undefined) {
+        setImmediate(onChange);
+      }
     }
   }
 
@@ -79,6 +94,9 @@ export function carousel(element) {
   function dispose() {
     stopTimer();
     element.removeEventListener('click', onClick);
+    if (isTransitionEndSupported) {
+      slides.removeEventListener('transitionend', onChange);
+    }
     updateActiveSlide();
   }
 
