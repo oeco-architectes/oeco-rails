@@ -41,6 +41,9 @@ gem 'foundation-rails'
 # Use browserify-rails for NPM support
 gem 'browserify-rails'
 
+# Use PostCSS/Autoprefixer for CSS
+gem 'autoprefixer-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console
