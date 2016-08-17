@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Project < ApplicationRecord
   def to_param
     slug

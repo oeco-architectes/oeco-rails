@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'boot'
 
 require 'rails/all'
@@ -12,6 +13,6 @@ module Oeco
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.browserify_rails.commandline_options = "-t [ babelify ]"
+    config.browserify_rails.commandline_options = '-t [ babelify ]'
   end
 end

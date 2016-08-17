@@ -1,5 +1,5 @@
+# frozen_string_literal: true
 class Mozaic
-
   class Tile
     EMPTY = 0
     SMALL = 1
@@ -31,9 +31,9 @@ class Mozaic
     buffer = ''
     columns.times do |column|
       buffer << case column
-      when 0 then top ? '╔═' : '╚═'
-      when columns - 1 then top ? '═╗' : '═╝'
-      else '═══'
+                when 0 then top ? '╔═' : '╚═'
+                when columns - 1 then top ? '═╗' : '═╝'
+                else '═══'
       end
     end
     buffer
@@ -65,9 +65,9 @@ class Mozaic
   end
 
   def set(tile, row, column)
-    raise ArgumentError, 'Column cannot be negative' if column < 0
+    raise ArgumentError, 'Column cannot be negative' if column.negative?
     raise ArgumentError, "Column cannot be greater or equal than #{@columns}" if column >= @columns
-    raise ArgumentError, 'Row cannot be negative' if row < 0
+    raise ArgumentError, 'Row cannot be negative' if row.negative?
     raise ArgumentError, "Unknown tile type \"#{tile}\"" unless Tile.values.include?(tile)
     raise ArgumentError, "A tile already exists at row #{row}, column #{column}" if @tiles[row][column] != Tile::EMPTY
 
@@ -115,13 +115,13 @@ class Mozaic
     sizes = sizes.map do |tile, remaining, available_slots|
       if remaining > available_slots.length
         raise ArgumentError,
-          "Impossible to determine tile position for Tile::#{Tile.sym(tile)}, " +
-          "only #{available_slots.length} slots available for #{remaining} tiles" +
-          ":\n#{to_s}"
+              "Impossible to determine tile position for Tile::#{Tile.sym(tile)}, " \
+              "only #{available_slots.length} slots available for #{remaining} tiles" \
+              ":\n#{self}"
       end
 
       probability =
-        if remaining == 0 then -1
+        if remaining.zero? then -1
         elsif tile == Tile::SMALL then 0 # Position small tiles at the end to minimize the risk of locks
         else remaining.to_f / available_slots.length
         end
@@ -230,15 +230,15 @@ class Mozaic
     # Increments small tiles until we reach desired result
     while small_tiles + 2 * (wide_tiles + tall_tiles) != rows * columns
       small_tiles += 1
-      if tall_tiles > 0 && (wide_tiles == 0 || tall_frequency - tall_tiles.to_f / items < wide_frequency - wide_tiles.to_f / items)
+      if tall_tiles.positive? && (wide_tiles.zero? || tall_frequency - tall_tiles.to_f / items < wide_frequency - wide_tiles.to_f / items)
         tall_tiles -= 1
-      elsif wide_tiles > 0
+      elsif wide_tiles.positive?
         wide_tiles -= 1
       else
-        raise "Failed finding the appropriate number of tiles to fill a " +
-          "#{rows}x#{columns} mozaic. Stopped at #{small_tiles - 1} small, " +
-          "#{tall_tiles} tall, and #{wide_tiles} wide tiles after swapping " +
-          "tall and wide tiles by small ones #{ideal_rows}"
+        raise 'Failed finding the appropriate number of tiles to fill a ' \
+              "#{rows}x#{columns} mozaic. Stopped at #{small_tiles - 1} small, " \
+              "#{tall_tiles} tall, and #{wide_tiles} wide tiles after swapping " \
+              "tall and wide tiles by small ones #{ideal_rows}"
       end
     end
 
@@ -251,10 +251,10 @@ class Mozaic
         mozaic.fill!(small_tiles, tall_tiles, wide_tiles)
         break
       rescue
-        if remaining_tries == 0
-          raise "Failed filling #{items} items in a #{rows}x#{columns} " +
-            "mozaic with #{small_tiles} small, #{tall_tiles} tall, and " +
-            "#{wide_tiles} wide tiles after #{retries} retries"
+        if remaining_tries.zero?
+          raise "Failed filling #{items} items in a #{rows}x#{columns} " \
+                "mozaic with #{small_tiles} small, #{tall_tiles} tall, and " \
+                "#{wide_tiles} wide tiles after #{retries} retries"
         end
         remaining_tries -= 1
         mozaic.empty!

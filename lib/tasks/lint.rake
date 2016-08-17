@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 task test: :lint
 
 task lint: :rubocop

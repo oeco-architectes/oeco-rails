@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'mozaic/mozaic'
 
 class MozaicTest < ActiveSupport::TestCase
