@@ -1,5 +1,8 @@
 language: ruby
 services: postgresql
+before_install:
+- nvm install 6
+- nvm use 6
 before_script:
 - bin/setup
 cache: bundler
