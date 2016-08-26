@@ -60,6 +60,10 @@ class Mozaic
     buffer
   end
 
+  def get(row, column)
+    @tiles[row][column]
+  end
+
   def set(tile, row, column)
     raise ArgumentError, 'Column cannot be negative' if column < 0
     raise ArgumentError, "Column cannot be greater or equal than #{@columns}" if column >= @columns
@@ -194,10 +198,10 @@ class Mozaic
   end
 
   def self.create(items, columns, options = {})
-    if 2 * items < columns
+    if items < columns
       raise ArgumentError, "Cannot fill #{items} items in #{columns} columns"
     end
-    if items < columns
+    if 2 * items < columns
       tall_frequency = 0
       wide_frequency = columns.to_f / (2.0 * items)
     else

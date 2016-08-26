@@ -2,7 +2,7 @@ require 'mozaic/mozaic'
 
 class MozaicTest < ActiveSupport::TestCase
 
-  test 'to_s displays the mozaic' do
+  test '#to_s displays the mozaic' do
     mozaic = Mozaic.new(2, 3)
     mozaic.set(Mozaic::Tile::SMALL, 0, 0)
     mozaic.set(Mozaic::Tile::EMPTY, 0, 1)
@@ -20,6 +20,17 @@ class MozaicTest < ActiveSupport::TestCase
     ].join("\n")
   end
 
+  test '.creates throws an error when items > columns' do
+    assert_raises { Mozaic.create(101, 100) }
+  end
+
+  test '.creates fills only with small tiles when items == columns' do
+    mozaic = Mozaic.create(100, 100)
+    100.times do |i|
+      assert_equal mozaic.get(0, i), Mozaic::Tile::SMALL
+    end
+  end
+
   CI = ENV.key?('CI')
   MAX_COLUMNS = CI ? 10 : 4
   MAX_ITEMS = CI ? 40 : 20
@@ -29,7 +40,7 @@ class MozaicTest < ActiveSupport::TestCase
     (1..MAX_ITEMS).each do |items|
       next if items < columns
 
-      test "can create a mozaic with #{columns} columns for #{items} items" do
+      test ".creates creates a mozaic with #{columns} columns for #{items} items" do
         (1..ITEMS).each do
           mozaic = Mozaic.create(items, columns)
           assert mozaic.valid?
