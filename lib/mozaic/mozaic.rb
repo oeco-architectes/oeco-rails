@@ -56,7 +56,7 @@ class Mozaic
       buffer << "║ #{@tiles[row].map { |t| self.class.tile_to_s(t, true) }.join} ║\n"
       buffer << "║ #{@tiles[row].map { |t| self.class.tile_to_s(t, false) }.join} ║\n"
     end
-    buffer << "#{self.class.h_border(@columns + 2, false)}\n"
+    buffer << "#{self.class.h_border(@columns + 2, false)}"
     buffer
   end
 
