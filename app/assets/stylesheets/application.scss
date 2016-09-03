@@ -15,6 +15,10 @@
  *= require lazyload
  */
 
+body {
+  background: red !important;
+}
+
 .turbolinks-progress-bar {
   background: #000;
 
