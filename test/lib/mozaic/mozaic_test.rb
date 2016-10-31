@@ -31,17 +31,17 @@ class MozaicTest < ActiveSupport::TestCase
     end
   end
 
-  CI = ENV.key?('CI')
-  MAX_COLUMNS = CI ? 10 : 4
-  MAX_ITEMS = CI ? 40 : 20
-  ITEMS = CI ? 50 : 10
+  MAX_COLUMNS = 10
+  MAX_ITEMS = 40
+  TIMES = 100
 
   (1..MAX_COLUMNS).each do |columns|
     (1..MAX_ITEMS).each do |items|
       next if items < columns
 
-      test ".creates creates a mozaic with #{columns} columns for #{items} items" do
-        (1..ITEMS).each do
+      test ".creates creates #{TIMES} times a mozaic with #{columns} columns " \
+           "for #{items} items" do
+        (1..TIMES).each do
           mozaic = Mozaic.create(items, columns)
           assert mozaic.valid?
         end
