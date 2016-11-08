@@ -38,10 +38,11 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
+    addressable (2.5.0)
+      public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
     ast (2.3.0)
-    autoprefixer-rails (6.5.1.1)
+    autoprefixer-rails (6.5.2)
       execjs
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
@@ -53,9 +54,8 @@ GEM
       sprockets (>= 3.5.2)
     builder (3.2.2)
     byebug (9.0.6)
-    codeclimate-test-reporter (0.6.0)
-      simplecov (>= 0.7.1, < 1.0.0)
-    codecov (0.1.6)
+    codeclimate-test-reporter (1.0.2)
+    codecov (0.1.7)
       json
       simplecov
       url
@@ -117,6 +117,7 @@ GEM
     platform-api (0.8.0)
       heroics (~> 0.0.17)
     powerpack (0.1.1)
+    public_suffix (2.0.4)
     puma (3.6.0)
     rack (2.0.1)
     rack-test (0.6.3)
