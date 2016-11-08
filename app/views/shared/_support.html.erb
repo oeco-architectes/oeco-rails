@@ -1,0 +1,7 @@
+<% # Minimalist Modernizr-like %>
+<script data-turbolinks-eval="false">
+  var d = document.documentElement, l = d.classList;
+  l.remove('no-js');
+  l.add('js');
+  l.add('ontouchstart' in d ? 'touch' : 'no-touch');
+</script>

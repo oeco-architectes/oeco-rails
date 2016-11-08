@@ -1,0 +1,37 @@
+@import 'settings';
+
+.mozaic {
+  list-style: none;
+}
+
+.mozaic-tile {
+  display: block;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+
+  &__caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    color: white;
+    padding: 0.5rem 0.7rem;
+    font-size: rem-calc(13);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+    .no-touch & {
+      transform: translateY(4 * 1em * $list-lineheight);
+      transition: transform 300ms ease-out;
+    }
+
+    .no-touch .mozaic-tile:hover & {
+      transform: translateY(0);
+    }
+  }
+}

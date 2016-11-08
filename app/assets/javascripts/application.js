@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require lazyload
 
-import { onReady, addEventListenerOnce } from './dom';
+import { setImmediate, onReady, addEventListenerOnce } from './dom';
 import { carousel } from './carousel';
+import { lazyload } from './lazyload';
 
 function updateHtmlAttributes(
   reference = document.body,
@@ -25,21 +25,23 @@ function updateHtmlAttributes(
   }
 }
 
+document.addEventListener('turbolinks:click', ({ target }) => {
+  document.documentElement.classList.add('loading');
+  addEventListenerOnce(document, 'turbolinks:load', () => {
+    setImmediate(() => updateHtmlAttributes(target));
+  });
+});
+
 onReady(() => {
-  setTimeout(() => document.documentElement.classList.remove('loading'), 0);
+  setImmediate(() => document.documentElement.classList.remove('loading'));
+
+  const updateLazyload = lazyload();
 
   // Carousel
   const element = document.querySelector('.carousel');
   if (element) {
-    const { play, dispose } = carousel(element);
+    const { play, dispose } = carousel(element, updateLazyload);
     addEventListenerOnce(document, 'turbolinks:before-visit', dispose);
     play(5000);
   }
-});
-
-document.addEventListener('turbolinks:click', ({ target }) => {
-  document.documentElement.classList.add('loading');
-  addEventListenerOnce(document, 'turbolinks:load', () => {
-    setTimeout(() => updateHtmlAttributes(target), 0);
-  });
 });

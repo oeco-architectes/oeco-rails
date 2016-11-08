@@ -1,0 +1,15 @@
+img[data-src] {
+  transition:
+    filter 200ms linear,
+    transform 300ms ease-in-out,
+    opacity 500ms ease-in-out;
+  opacity: 0.5;
+  transform: scale(1.1);
+  filter: brightness(150%) contrast(50%) saturate(80%) blur(20px);
+
+  &.loaded {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(100%) contrast(100%) saturate(100%) blur(0);
+  }
+}

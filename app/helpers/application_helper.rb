@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Application helpers
 module ApplicationHelper
   def controller?(*controller)
     controller.include?(params[:controller])
@@ -12,6 +15,6 @@ module ApplicationHelper
     }
     renderer = Redcarpet::Render::HTML.new(options)
 
-    Redcarpet::Markdown.new(renderer).render(text).html_safe
+    Redcarpet::Markdown.new(renderer).render(text)
   end
 end
