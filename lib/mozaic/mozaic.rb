@@ -14,6 +14,8 @@ module Mozaic
   # 2. large: 1x2
   # 3. tall: 2x1
   class Mozaic
+    DEFAULT_RETRIES = 100
+
     def initialize(rows, columns)
       @rows = rows
       @columns = columns
@@ -227,7 +229,7 @@ module Mozaic
 
       mozaic = new(rows, columns)
 
-      retries = options[:retries] || 10
+      retries = options[:retries] || DEFAULT_RETRIES
       remaining_tries = retries
       loop do
         begin
