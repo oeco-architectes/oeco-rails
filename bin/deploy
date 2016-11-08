@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
+# rubocop:disable Metrics/BlockLength
 
 require_relative '../config/boot'
 
@@ -54,13 +55,15 @@ chdir APP_ROOT do
 
   puts "\n== Deployment =="
   puts "Promoting #{staging_app['name']} to production..."
-  promotion = client.pipeline_promotion.create('pipeline': { 'id': pipeline['id'] },
-                                               'source': {
-                                                 'app': { 'id': staging_app['id'] }
-                                               },
-                                               'targets': [{
-                                                 'app': { 'id': production_app['id'] }
-                                               }])
+  promotion = client.pipeline_promotion.create(
+    'pipeline' => { 'id' => pipeline['id'] },
+    'source' => {
+      'app' => { 'id' => staging_app['id'] }
+    },
+    'targets' => [{
+      'app' => { 'id' => production_app['id'] }
+    }]
+  )
   puts "Promoted #{staging_app['name']} successfully!"
 
   status = promotion['status']

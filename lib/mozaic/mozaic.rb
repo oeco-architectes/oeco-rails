@@ -1,4 +1,10 @@
 # frozen_string_literal: true
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/ClassLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/PerceivedComplexity
+
 require_relative './tile'
 
 module Mozaic
@@ -14,20 +20,20 @@ module Mozaic
       @tiles = Array.new(rows) { Array.new(columns, Tile::EMPTY) }
     end
 
-    def line_to_s(row, top, separator = '')
-      @tiles[row].map { |tile| Tile.to_s(tile, top) }.join(separator)
-    end
-
     def to_s
       [
         "╔═#{'═══' * @columns}═╗",
         (0..@rows - 1).map do |row|
           [true, false].map do |top|
-            "║ #{line_to_s(row, top)} ║"
+            "║ #{@tiles[row].map { |tile| Tile.to_s(tile, top) }.join} ║"
           end
         end,
         "╚═#{'═══' * @columns}═╝"
       ].flatten.join("\n")
+    end
+
+    def get(row, column)
+      @tiles[row][column]
     end
 
     def set(tile, row, column)
@@ -48,35 +54,11 @@ module Mozaic
       end
     end
 
-    def to_s
-      buffer = "#{self.class.h_border(@columns + 2, true)}\n"
-      @rows.times do |row|
-        buffer << "║ #{@tiles[row].map { |t| Tile.tile_to_s(t, true) }.join} ║\n"
-        buffer << "║ #{@tiles[row].map { |t| Tile.tile_to_s(t, false) }.join} ║\n"
-      end
-      buffer << "#{self.class.h_border(@columns + 2, false)}"
-      buffer
-    end
-
-    def get(row, column)
-      @tiles[row][column]
-    end
-
-    def set(tile, row, column)
-      raise ArgumentError, 'Column cannot be negative' if column.negative?
-      raise ArgumentError, "Column cannot be greater or equal than #{@columns}" if column >= @columns
-      raise ArgumentError, 'Row cannot be negative' if row.negative?
-      raise ArgumentError, "Unknown tile type \"#{tile}\"" unless Tile.values.include?(tile)
-      raise ArgumentError, "A tile already exists at row #{row}, column #{column}" if @tiles[row][column] != Tile::EMPTY
-
-      @tiles[row][column] = tile
-    end
-
     def assert_tiles(small_tiles, tall_tiles, wide_tiles)
+      error_message = -> { "Cannot fit #{total_tiles} tiles in a #{@rows}x#{@columns} mozaic" }
+
       total_tiles = small_tiles + 2 * (tall_tiles + wide_tiles)
-      if @rows * @columns != total_tiles
-        raise ArgumentError, "Cannot fit #{total_tiles} tiles in a #{@rows}x#{@columns} mozaic"
-      end
+      raise ArgumentError, error_message if @rows * @columns != total_tiles
     end
 
     def set_randomly(small_tiles, tall_tiles, wide_tiles)
@@ -229,7 +211,9 @@ module Mozaic
       # Increments small tiles until we reach desired result
       while small_tiles + 2 * (wide_tiles + tall_tiles) != rows * columns
         small_tiles += 1
-        if tall_tiles.positive? && (wide_tiles.zero? || tall_frequency - tall_tiles.to_f / items < wide_frequency - wide_tiles.to_f / items)
+        tall_frequency_rest = tall_frequency - tall_tiles.to_f / items
+        wide_frequency_rest = wide_frequency - wide_tiles.to_f / items
+        if tall_tiles.positive? && (wide_tiles.zero? || tall_frequency_rest > wide_frequency_rest)
           tall_tiles -= 1
         elsif wide_tiles.positive?
           wide_tiles -= 1

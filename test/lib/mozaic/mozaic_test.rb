@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 require 'mozaic/mozaic'
 
+# Test for Mozaic
 class MozaicTest < ActiveSupport::TestCase
-
   test '#to_s displays the mozaic' do
     mozaic = Mozaic::Mozaic.new(2, 3)
     mozaic.set(Mozaic::Tile::SMALL, 0, 0)
