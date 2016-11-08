@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+# rubocop:disable Rails/Output
 
 require_relative './mozaic'
 
@@ -10,7 +12,7 @@ loop do
 
       puts ''
       puts "### (#{i}) #{items} in #{columns} columns"
-      mozaic = Mozaic.create(items, columns)
+      mozaic = Mozaic::Mozaic.create(items, columns)
       puts mozaic
       puts "=> valid? #{mozaic.valid?}\n\n"
       i += 1

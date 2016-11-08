@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 require 'pathname'
 require 'fileutils'
 include FileUtils
@@ -25,7 +26,7 @@ chdir APP_ROOT do
   # end
 
   puts "\n== Preparing database =="
-  if %w{production staging}.include?(ENV['RAILS_ENV'])
+  if %w(production staging).include?(ENV['RAILS_ENV'])
     system! 'bin/rails db:migrate'
   else
     system! 'bin/rails db:setup'

@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 require 'mozaic/mozaic'
 
+# Test for Mozaic
 class MozaicTest < ActiveSupport::TestCase
-
   test '#to_s displays the mozaic' do
-    mozaic = Mozaic.new(2, 3)
+    mozaic = Mozaic::Mozaic.new(2, 3)
     mozaic.set(Mozaic::Tile::SMALL, 0, 0)
     mozaic.set(Mozaic::Tile::EMPTY, 0, 1)
     mozaic.set(Mozaic::Tile::WIDE_LEFT, 1, 0)
@@ -21,11 +22,11 @@ class MozaicTest < ActiveSupport::TestCase
   end
 
   test '.creates throws an error when items > columns' do
-    assert_raises { Mozaic.create(101, 100) }
+    assert_raises { Mozaic::Mozaic.create(101, 100) }
   end
 
   test '.creates fills only with small tiles when items == columns' do
-    mozaic = Mozaic.create(100, 100)
+    mozaic = Mozaic::Mozaic.create(100, 100)
     100.times do |i|
       assert_equal mozaic.get(0, i), Mozaic::Tile::SMALL
     end
@@ -42,7 +43,7 @@ class MozaicTest < ActiveSupport::TestCase
       test ".creates creates #{TIMES} times a mozaic with #{columns} columns " \
            "for #{items} items" do
         (1..TIMES).each do
-          mozaic = Mozaic.create(items, columns)
+          mozaic = Mozaic::Mozaic.create(items, columns)
           assert mozaic.valid?
         end
       end
